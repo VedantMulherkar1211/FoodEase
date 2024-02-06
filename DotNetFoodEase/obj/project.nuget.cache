@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Vmk2CpIPUilvqwRxoW7R6vmdxmJjHYpfKT0Cgo+vovqe+kMNIcJGVpORJu/YhkcYG2spDTuSiORkQlJXvEhpow==",
+  "success": true,
+  "projectFilePath": "D:\\STUDY\\DAC\\Final Project\\FoodEase\\DotNetFoodEase\\DotNetFoodEase.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\sachi\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.19.5\\microsoft.visualstudio.azure.containers.tools.targets.1.19.5.nupkg.sha512"
+  ],
+  "logs": []
+}
