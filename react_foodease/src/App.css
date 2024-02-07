@@ -1,7 +1,7 @@
 .App {
-  text-align: center;
-}
-
+  text-align: center; /** Centers App*/
+}   
+ 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
