@@ -29,6 +29,14 @@ function Delivery() {
                 <input type='password' className="form-control" placeholder='Password'/>
               </div>
               <br/>
+              <div className="form-group">
+                <input type='text' className="form-control" placeholder='vehicle_License_No '/>
+              </div>
+              <br/>
+              <div className="form-group">
+                <input type='text' className="form-control" placeholder='photo_id_number'/>
+              </div>
+              <br/>
               <br/>
               <div className="text-center">
                 <button type='submit' className="btn btn-primary btn-block btn btn-dark">Submit</button>

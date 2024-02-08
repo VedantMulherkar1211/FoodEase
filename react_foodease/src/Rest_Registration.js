@@ -18,7 +18,15 @@ function Restaurants() {
               </div>
               <br/>
               <div className="form-group">
+                <input type='text' className="form-control" placeholder='Address'/>
+                </div>
+              <br/>
+              <div className="form-group">
                 <input type='tel' className="form-control" placeholder='Phone Number'/>
+              </div>
+              <br/>
+              <div className="form-group">
+                <input type='text' className="form-control" placeholder='Restaurant License'/>
               </div>
               <br/>
               <div className="form-group">
@@ -29,9 +37,8 @@ function Restaurants() {
                 <input type='password' className="form-control" placeholder='Password'/>
               </div>
               <br/>
-              <br/>
               <div className="text-center">
-                <button type='submit' className="btn btn-primary btn-block btn btn-dark">Submit</button>
+                <button type='submit' className="btn btn-primary btn-block btn-dark">Submit</button>
               </div>
             </div>
           </div>
