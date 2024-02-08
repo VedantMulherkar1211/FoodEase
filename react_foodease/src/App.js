@@ -1,9 +1,15 @@
 import React from 'react';
-import Home from './Home';
+import Login from './login_form';
+import Customer from './Cust_Registration';
+import Restaurants from './Rest_Registration';
+import Delivery from './Delivery_Registration';
 function App() {
   return (
     <div className='App'>
-      <Home/>
+      <Login/>
+      <Customer/>
+      <Restaurants/>
+      <Delivery/>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function Login() {
+function Customer() {
   return (
     <div className="container">
       <div className="row justify-content-center">
@@ -9,6 +9,18 @@ function Login() {
           <div className="card mt-5">
             <div className="card-body bg-warning">
               <h2 className="text-center mb-4">Registration</h2>
+              <div className="form-group">
+                <input type='text' className="form-control" placeholder='Full Name'/>
+              </div>
+              <br/>
+              <div className="form-group">
+                <input type='email' className="form-control" placeholder='Email'/>
+              </div>
+              <br/>
+              <div className="form-group">
+                <input type='tel' className="form-control" placeholder='Phone Number'/>
+              </div>
+              <br/>
               <div className="form-group">
                 <input type='text' className="form-control" placeholder='User Name'/>
               </div>
@@ -29,4 +41,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Customer;
