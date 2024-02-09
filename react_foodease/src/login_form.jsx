@@ -8,7 +8,7 @@ function Login() {
         <div className="col-md-6">
           <div className="card mt-5">
             <div className="card-body bg-warning">
-              <h2 className="text-center mb-4">LOGIN</h2>
+              <h2 className="text-center mb-4">Login</h2>
               <div className="form-group">
                 <input type='text' className="form-control" placeholder='User Name'/>
               </div>
