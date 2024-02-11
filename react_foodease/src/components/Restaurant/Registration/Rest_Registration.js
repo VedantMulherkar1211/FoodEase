@@ -4,23 +4,22 @@ import React, { useReducer } from 'react';
 import { useLocation } from "react-router-dom";
 import { Link, useNavigate } from "react-router-dom";
 
-function Delivery() {
+function RestaurantsRegistration() {
 
   const navigate = useNavigate();
 
     const location = useLocation();
-    console.log(location)
+    //console.log(location)
 
 
     const init = {
-        dname: {value:"",valid: false, touched: false, error:""}, 
-        demail: {value:"",valid: false, touched: false, error:""},
+        rname: {value:"",valid: false, touched: false, error:""}, 
+        remail: {value:"",valid: false, touched: false, error:""},
         phno: {value:"",valid: false, touched: false, error:""},
         uname: {value:"",valid: false, touched: false, error:""},
         passw: {value:"",valid: false, touched: false, error:""},
-        daddress: {value:"",valid: false, touched: false, error:""},
-        vlno: {value:"",valid: false, touched: false, error:""},
-        pino: {value:"",valid: false, touched: false, error:""},
+        raddress: {value:"",valid: false, touched: false, error:""},
+        lno: {value:"",valid: false, touched: false, error:""},
         formValid: false
     }
 
@@ -46,7 +45,7 @@ function Delivery() {
     let error = ""
     switch(key)
     {
-        case 'demail':
+        case 'remail':
            var pattern1 = /^[\w._#-]{4,20}@[\w-]{5,15}\.[a-z]{2,3}$/ 
            if(!pattern1.test(val))
            {
@@ -64,7 +63,7 @@ function Delivery() {
            }
            break;
 
-        case 'dname':
+        case 'rname':
            var pattern3 = /^[A-Za-z\s]{2,30}$/ 
            if(!pattern3.test(val))
            {
@@ -90,7 +89,7 @@ function Delivery() {
                    error = "required 10 digit number"
                 }
                 break;
-        case 'daddress':
+        case 'raddress':
                 var pattern6 = /^[\s,A-Za-z0-9_@]{3,60}$/;
                 if(!pattern6.test(val))
                 {
@@ -98,20 +97,12 @@ function Delivery() {
                    error = "Please enter address"
                 }
                 break;
-        case 'vlno':
-                var pattern6 = /^[A-Z]{2}\d{2}[A-Z]{2}\d{4}$/;
+        case 'lno':
+                var pattern6 = /^[0-9]{14}$/;
                 if(!pattern6.test(val))
                 {
                    valid = false;
-                   error = "Please enter valid vehicle no"
-                }
-                break;
-        case 'pino':
-                var pattern6 = /^[A-Za-z0-9]{10}$/;
-                if(!pattern6.test(val))
-                {
-                   valid = false;
-                   error = "Please enter valid photo id no"
+                   error = "Please enter valid FSSI licence no"
                 }
                 break;
 
@@ -156,15 +147,14 @@ function Delivery() {
         method:"POST",
         headers:{'content-type':'application/json'},
         body:JSON.stringify({
-            demail:puser.demail.value,
+            remail:puser.remail.value,
             passw:puser.passw.value,
-            dusername :puser.uname.value,
-            dname :puser.dname.value,
+            rusername :puser.uname.value,
+            rname :puser.rname.value,
             ppassword :puser.passw.value,
             phoneNumber :puser.phno.value,
-            daddress :puser.daddress.value,
-            vlno :puser.vlno.value,
-            pino :puser.pino.value
+            raddress :puser.daddress.value,
+            lno :puser.lno.value
             
         })
     }
@@ -194,35 +184,50 @@ function Delivery() {
           <div className="card mt-5">
             <div className="card-body bg-warning">
               <h2 className="text-center mb-4">Registration</h2>
+
               <div className="form-group">
-                <input type='text' className="form-control" placeholder='Full Name' id="fullName" autoComplete="off" name="dname" 
-                    value={puser.dname.value}
-                    onChange={(e)=>{handleChange("dname",e.target.value)}} 
-                    onBlur={(e)=>{handleChange("dname",e.target.value)}}
+                <input type='text' className="form-control" placeholder='Full Name' id="fullName" autoComplete="off" name="rname" 
+                    value={puser.rname.value}
+                    onChange={(e)=>{handleChange("rname",e.target.value)}} 
+                    onBlur={(e)=>{handleChange("rname",e.target.value)}}
                     />
 
                     <br/>
 
-                    <div style={{ display: puser.dname.touched && !puser.dname.valid  ?"block":"none",color: 'red' }}>
-                    { puser.dname.error}
+                    <div style={{ display: puser.rname.touched && !puser.rname.valid  ?"block":"none",color: 'red' }}>
+                    { puser.rname.error}
                     </div>
               </div>
 
               <br/>
 
               <div className="form-group">
-                <input type='email' className="form-control" placeholder='Email' id="email" autoComplete="off" name="demail" 
-                    value={puser.demail.value}
-                    onChange={(e)=>{handleChange("demail",e.target.value)}} 
-                    onBlur={(e)=>{handleChange("demail",e.target.value)}}
+                <input type='email' className="form-control" placeholder='Email' id="email" autoComplete="off" name="remail" 
+                    value={puser.remail.value}
+                    onChange={(e)=>{handleChange("remail",e.target.value)}} 
+                    onBlur={(e)=>{handleChange("remail",e.target.value)}}
                      />
 
                     <br/>
 
-                    <div style={{ display: puser.demail.touched && !puser.demail.valid  ?"block":"none",color: 'red' }}>
-                    { puser.demail.error}
+                    <div style={{ display: puser.remail.touched && !puser.remail.valid  ?"block":"none",color: 'red' }}>
+                    { puser.remail.error}
                     </div>
               </div>
+
+              <br/>
+
+              <div className="form-group">
+                <input type='text' className="form-control" placeholder='Address' id="address" autoComplete="off" name="raddress" 
+                value={puser.raddress.value}
+                onChange={(e)=>{handleChange("raddress",e.target.value)}} 
+                 onBlur={(e)=>{handleChange("raddress",e.target.value)}}
+              />
+                    <br/>
+                    <div style={{ display: puser.raddress.touched && !puser.raddress.valid  ?"block":"none",color: 'red'}}>
+                    { puser.raddress.error}
+                    </div>
+                </div>
 
               <br/>
 
@@ -237,6 +242,20 @@ function Delivery() {
 
                     <div style={{ display: puser.phno.touched && !puser.phno.valid  ?"block":"none",color: 'red' }}>
                     {puser.phno.error}
+                    </div>
+              </div>
+
+              <br/>
+
+              <div className="form-group">
+                <input type='text' className="form-control" placeholder='Restaurant License' id="lno" autoComplete="off" name="lno" 
+                value={puser.lno.value}
+                onChange={(e)=>{handleChange("lno",e.target.value)}} 
+                 onBlur={(e)=>{handleChange("lno",e.target.value)}}
+              />
+                    <br/>
+                    <div style={{ display: puser.lno.touched && !puser.lno.valid  ?"block":"none",color: 'red'}}>
+                    { puser.lno.error}
                     </div>
               </div>
 
@@ -272,51 +291,8 @@ function Delivery() {
 
               <br/>
 
-              <div className="form-group">
-              <input type='text' className="form-control" placeholder='Address' id="address" autoComplete="off" name="daddress" 
-                value={puser.daddress.value}
-                onChange={(e)=>{handleChange("daddress",e.target.value)}} 
-                 onBlur={(e)=>{handleChange("daddress",e.target.value)}}
-              />
-                    <br/>
-                    <div style={{ display: puser.daddress.touched && !puser.daddress.valid  ?"block":"none",color: 'red'}}>
-                    { puser.daddress.error}
-                    </div>
-              </div>
-
-              <br/>
-
-              <div className="form-group">
-                <input type='text' className="form-control" placeholder='vehicle_License_No ' id="vlno" autoComplete="off" name="vlno" 
-                value={puser.vlno.value}
-                onChange={(e)=>{handleChange("vlno",e.target.value)}} 
-                 onBlur={(e)=>{handleChange("vlno",e.target.value)}}
-              />
-                    <br/>
-                    <div style={{ display: puser.vlno.touched && !puser.vlno.valid  ?"block":"none",color: 'red'}}>
-                    { puser.vlno.error}
-                    </div>
-              </div>
-
-              <br/>
-
-              <div className="form-group">
-                <input type='text' className="form-control" placeholder='photo_id_number' id="pino" autoComplete="off" name="pino" 
-                value={puser.pino.value}
-                onChange={(e)=>{handleChange("pino",e.target.value)}} 
-                 onBlur={(e)=>{handleChange("pino",e.target.value)}}
-              />
-                    <br/>
-                    <div style={{ display: puser.pino.touched && !puser.pino.valid  ?"block":"none",color: 'red'}}>
-                    { puser.pino.error}
-                    </div>
-              </div>
-
-              <br/>
-              <br/>
-              
               <div className="text-center">
-                <button type='submit' className="btn btn-primary btn-block btn btn-dark">Submit</button>
+                <button type='submit' className="btn btn-primary btn-block btn-dark">Submit</button>
               </div>
 
             </div>
@@ -327,4 +303,4 @@ function Delivery() {
   );
 }
 
-export default Delivery;
+export default RestaurantsRegistration;

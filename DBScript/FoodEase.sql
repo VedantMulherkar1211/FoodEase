@@ -7,10 +7,10 @@ create table Role(
     role_name varchar(25) unique);
     
     insert into Role values(1,'User');
-      insert into Role values(2,'Restaurants');
-        insert into Role values(3,'Drivers');
-        insert into Role values(4,'Admin');
-        select * from role;
+    insert into Role values(2,'Restaurants');
+    insert into Role values(3,'Drivers');
+    insert into Role values(4,'Admin');
+    select * from role;
 /*------------------------------------------------------------------------------------*/
 
 /*Login table*/

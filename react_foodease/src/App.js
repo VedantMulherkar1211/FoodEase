@@ -1,27 +1,31 @@
 import React from 'react';
-import Login from './login_form';
-import Customer from './Cust_Registration';
-import Restaurants from './Rest_Registration';
-import Delivery from './Delivery_Registration';
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route,Routes  } from 'react-router-dom';
+import Login from './components/customer/Login/login_form';
+import CustomerRegistration from './components/customer/Registration/Cust_Registration';
+import CustomerHome from './components/customer/Home/customerhome';
+import RestaurantHome from './components/Restaurant/Home/restauranthome'
+import DeliveryHome from './components/delivery/Home/deliveryhome';
+import AdminHome from './components/admin/Home/adminhome';
+import RestaurantsRegistration from './components/Restaurant/Registration/Rest_Registration';
+import DeliveryRegistration from './components/delivery/Registration/Delivery_Registration';
 function App() {
   return (
-    <div className='App'>
-      <BrowserRouter>
+    <BrowserRouter>
       <Routes>
           <Route path='/' element={<Login/>} />
-          {/* <Route path='/home' element={<Navbar/>} /> */}
-          <Route path='/login' element={<Login/>} />
-          <Route path='/customer_registration' element={<Customer/>} />
-          <Route path='/deliveryBoy_registration' element={<Delivery/>} />
-          <Route path='/rOwner_registration' element={<Restaurants/>}/>
-        </Routes>
-      </BrowserRouter>
-      
+          <Route path='/home' element={<CustomerHome/>}/>
+          <Route path='/homeres' element={<RestaurantHome/>}/>
+          <Route path='/homedel' element={<DeliveryHome/>}/>
+          <Route path='/homead' element={<AdminHome/>}/>
+            <Route path='/user/register' element={<CustomerRegistration/>}/>
+            <Route path='/restaurant/register' element={<RestaurantsRegistration/>}/>
+            <Route path='/delivery/register' element={<DeliveryRegistration/>}/>
+            
+       </Routes>
+    </BrowserRouter>
     
-    </div>
 
-    
   );
 }
-export default App; 
+
+export default App;
