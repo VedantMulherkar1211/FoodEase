@@ -22,7 +22,6 @@ function Login() {
       switch(action.type)
       {
           case 'update':
-              //object destructuring
               const {key,value,touched,valid,error,formValid} = action.data;
               return {...state,[key]:{value,touched,valid,error},formValid}
           case 'reset':
@@ -58,8 +57,17 @@ function Login() {
                 error = "invalid password"
              }
              break;
-          default:
-
+          
+          
+          case 'conpassw': 
+              var pattern2 = /[\w\d@]{3,20}$/ 
+             if(!pattern2.test(val))
+             {
+                valid = false;
+                error = "invalid password"
+             }
+             break;
+             default:
 
       }
       return { valid: valid, error: error}
@@ -100,26 +108,27 @@ function Login() {
           method:"POST",
           headers:{'content-type':'application/json'},
           body:JSON.stringify({
-              pemail:puser.usern.value,
-              passw:puser.passw.value
+              email:puser.usern.value,
+              password:puser.passw.value,
+              conpassword:puser.passw.value
               
           })
       }
-      // fetch("http://localhost:9001/insertLogin",reOption)
-      //     .then(resp=>resp.text())
-      //     .then(data => {
-      //         // Handle the response from the server
-      //         console.log(data);
-      //         if (data === 'Login successful') {
-      //           // Redirect or perform other actions for successful login
-      //           alert('Login successful');
-      //           navigate('/home')
-      //         } else {
-      //           // Handle unsuccessful login
-      //           alert('Invalid email or password');
-      //         }
-      //       })
       
+      fetch('http://localhost:8080/checkLogin', reOption)
+      .then((response) => {
+        if (response.ok) {
+          // Successful login
+          alert('Login successful!');
+  
+          // Redirect or perform other actions on successful login
+          navigate("/customer-home");
+        } else {
+          // Login failed
+          alert('Login failed. Please enter valid credentials and try again.');
+        }
+      })  
+
   }
 
 
@@ -130,7 +139,7 @@ function Login() {
         <div className="col-md-6">
           <div className="card mt-5">
             <div className="card-body bg-warning">
-              <h2 className="text-center mb-4">Login</h2>
+              <h2 className="text-center mb-4">Forget</h2>
 
               <div className="form-group">
                 <input type='text' className="form-control" placeholder='User Name' id="usern" name="usern" autoComplete="off"
@@ -155,6 +164,18 @@ function Login() {
 
                     <br/>
 
+                    
+              <br/>
+
+<div className="form-group">
+  <input type='password' className="form-control" placeholder='Conform Password' id="conpass" name="conpass" autoComplete="off" 
+      value={puser.passw.value}
+      onChange={(e)=>{handleChange("conpass",e.target.value)}} 
+      onBlur={(e)=>{handleChange("conpass",e.target.value)}}
+       />
+
+      <br/>
+
                     <div style={{ display: puser.passw.touched && !puser.passw.valid  ?"block":"none",color: 'red'}}>
                     { puser.passw.error}
                     </div>
@@ -165,6 +186,25 @@ function Login() {
               <div className="text-center">
                 <button type='submit' className="btn btn-primary btn-block btn btn-dark" disabled={!puser.formValid} onClick={(e)=>{InsertData(e)}}>Submit</button>
               </div>
+              
+              <div className="mt-3">
+          <p className="mb-0">
+            New Customer? <Link to="/user/register">Register here</Link>
+          </p>
+          <p className="mb-0">
+             Restaurant <Link to="/restaurant/register">Register Restaurant</Link>
+          </p>
+          
+          <p className="mb-0">
+             Delivery <Link to="/delivery/register">Register Delivery</Link>
+          </p>
+
+          
+          <p className="mb-0">
+             Forget Password? <Link to="/forget">Forget Password</Link>
+          </p>
+        </div>
+
 
             </div>
           </div>
@@ -172,7 +212,7 @@ function Login() {
       </div>
 
     </div>
-
+    </div>
   );
 }
 

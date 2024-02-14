@@ -100,26 +100,26 @@ function Login() {
           method:"POST",
           headers:{'content-type':'application/json'},
           body:JSON.stringify({
-              pemail:puser.usern.value,
-              passw:puser.passw.value
+              email:puser.usern.value,
+              password:puser.passw.value
               
           })
       }
-      // fetch("http://localhost:9001/insertLogin",reOption)
-      //     .then(resp=>resp.text())
-      //     .then(data => {
-      //         // Handle the response from the server
-      //         console.log(data);
-      //         if (data === 'Login successful') {
-      //           // Redirect or perform other actions for successful login
-      //           alert('Login successful');
-      //           navigate('/home')
-      //         } else {
-      //           // Handle unsuccessful login
-      //           alert('Invalid email or password');
-      //         }
-      //       })
       
+      fetch('http://localhost:8080/checkLogin', reOption)
+      .then((response) => {
+        if (response.ok) {
+          // Successful login
+          alert('Login successful!');
+  
+          // Redirect or perform other actions on successful login
+          navigate("/home");
+        } else {
+          // Login failed
+          alert('Login failed. Please enter valid credentials and try again.');
+        }
+      })  
+
   }
 
 
@@ -165,6 +165,25 @@ function Login() {
               <div className="text-center">
                 <button type='submit' className="btn btn-primary btn-block btn btn-dark" disabled={!puser.formValid} onClick={(e)=>{InsertData(e)}}>Submit</button>
               </div>
+              
+              <div className="mt-3">
+          <p className="mb-0">
+            New Customer? <Link to="/user/register">Register here</Link>
+          </p>
+          <p className="mb-0">
+             Restaurant <Link to="/restaurant/register">Register Restaurant</Link>
+          </p>
+          
+          <p className="mb-0">
+             Delivery <Link to="/delivery/register">Register Delivery</Link>
+          </p>
+
+          
+          <p className="mb-0">
+             Forget Password? <Link to="/forget">Forget Password</Link>
+          </p>
+        </div>
+
 
             </div>
           </div>
