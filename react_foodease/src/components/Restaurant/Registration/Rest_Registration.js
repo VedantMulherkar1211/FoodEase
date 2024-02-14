@@ -14,14 +14,16 @@ function RestaurantsRegistration() {
 
     const init = {
         rname: {value:"",valid: false, touched: false, error:""}, 
+        lname: {value:"",valid: false, touched: false, error:""}, 
         remail: {value:"",valid: false, touched: false, error:""},
         phno: {value:"",valid: false, touched: false, error:""},
         uname: {value:"",valid: false, touched: false, error:""},
         passw: {value:"",valid: false, touched: false, error:""},
         raddress: {value:"",valid: false, touched: false, error:""},
-        lno: {value:"",valid: false, touched: false, error:""},
         formValid: false
     }
+
+    
 
     const reducer = (state,action) => {
       switch(action.type)
@@ -64,11 +66,20 @@ function RestaurantsRegistration() {
            break;
 
         case 'rname':
-           var pattern3 = /^[A-Za-z\s]{2,30}$/ 
+           var pattern3 = /^[A-Za-z]{2,30}$/ 
            if(!pattern3.test(val))
            {
               valid = false;
               error = "enter your full name and only letters allow"
+           }
+           break;
+
+        case 'lname':
+           var pattern3 = /^[A-Za-z]{2,30}$/ 
+           if(!pattern3.test(val))
+           {
+              valid = false;
+              error = "enter valid last name and only letters allow"
            }
            break;
 
@@ -97,15 +108,6 @@ function RestaurantsRegistration() {
                    error = "Please enter address"
                 }
                 break;
-        case 'lno':
-                var pattern6 = /^[0-9]{14}$/;
-                if(!pattern6.test(val))
-                {
-                   valid = false;
-                   error = "Please enter valid FSSI licence no"
-                }
-                break;
-
         default:
 
 
@@ -147,31 +149,29 @@ function RestaurantsRegistration() {
         method:"POST",
         headers:{'content-type':'application/json'},
         body:JSON.stringify({
-            remail:puser.remail.value,
-            passw:puser.passw.value,
-            rusername :puser.uname.value,
-            rname :puser.rname.value,
-            ppassword :puser.passw.value,
-            phoneNumber :puser.phno.value,
-            raddress :puser.daddress.value,
-            lno :puser.lno.value
-            
+            fname :puser.rname.value,
+            lname :puser.lname.value,
+            address :puser.raddress.value,  
+            phone :puser.phno.value, 
+            username :puser.uname.value,         
+            email:puser.remail.value,
+            password :puser.passw.value,
         })
     }
-    // fetch("http://localhost:9001/registerPassenger",reOption)
-    //     .then(resp=>resp.text())
-    //     .then(data => {
-    //         // Handle the response from the server
-    //         console.log(data);
-    //         if (data === 'Passenger inserted successfully') {
-    //           // Redirect or perform other actions for successful login
-    //           alert('Registration successful');
-    //           navigate('/login')
-    //         } else {
-    //           // Handle unsuccessful login
-    //           alert('Registration unsuccessful');
-    //         }
-    //       })
+    
+    fetch('http://localhost:8080/regRowner', reOption)
+    .then((response) => {
+      if (response.ok) {
+        // Successful login
+        alert('Registration successful!');
+
+        // Redirect or perform other actions on successful login
+        navigate("/login");
+      } else {
+        // Login failed
+        alert('Registration Fail!! Please Try Again');
+      }
+    })
     
   }
 
@@ -183,10 +183,10 @@ function RestaurantsRegistration() {
         <div className="col-md-6">
           <div className="card mt-5">
             <div className="card-body bg-warning">
-              <h2 className="text-center mb-4">Registration</h2>
+              <h2 className="text-center mb-4">Restaurant Owner Registration</h2>
 
               <div className="form-group">
-                <input type='text' className="form-control" placeholder='Full Name' id="fullName" autoComplete="off" name="rname" 
+                <input type='text' className="form-control" placeholder='First Name' id="firstName" autoComplete="off" name="rname" 
                     value={puser.rname.value}
                     onChange={(e)=>{handleChange("rname",e.target.value)}} 
                     onBlur={(e)=>{handleChange("rname",e.target.value)}}
@@ -196,6 +196,22 @@ function RestaurantsRegistration() {
 
                     <div style={{ display: puser.rname.touched && !puser.rname.valid  ?"block":"none",color: 'red' }}>
                     { puser.rname.error}
+                    </div>
+              </div>
+
+              <br/>
+
+              <div className="form-group">
+                <input type='text' className="form-control" placeholder='Last Name' id="lastName" autoComplete="off" name="lname" 
+                    value={puser.lname.value}
+                    onChange={(e)=>{handleChange("lname",e.target.value)}} 
+                    onBlur={(e)=>{handleChange("lname",e.target.value)}}
+                    />
+
+                    <br/>
+
+                    <div style={{ display: puser.lname.touched && !puser.lname.valid  ?"block":"none",color: 'red' }}>
+                    { puser.lname.error}
                     </div>
               </div>
 
@@ -248,20 +264,6 @@ function RestaurantsRegistration() {
               <br/>
 
               <div className="form-group">
-                <input type='text' className="form-control" placeholder='Restaurant License' id="lno" autoComplete="off" name="lno" 
-                value={puser.lno.value}
-                onChange={(e)=>{handleChange("lno",e.target.value)}} 
-                 onBlur={(e)=>{handleChange("lno",e.target.value)}}
-              />
-                    <br/>
-                    <div style={{ display: puser.lno.touched && !puser.lno.valid  ?"block":"none",color: 'red'}}>
-                    { puser.lno.error}
-                    </div>
-              </div>
-
-              <br/>
-
-              <div className="form-group">
                 <input type='text' className="form-control" placeholder='User Name' id="userName" autoComplete="off" name="uname" 
                     value={puser.uname.value}
                     onChange={(e)=>{handleChange("uname",e.target.value)}} 
@@ -292,7 +294,7 @@ function RestaurantsRegistration() {
               <br/>
 
               <div className="text-center">
-                <button type='submit' className="btn btn-primary btn-block btn-dark">Submit</button>
+              <button type='submit' className="btn btn-primary btn-block btn btn-dark" disabled={!puser.formValid} onClick={(e)=>InsertData(e)}>Submit</button>
               </div>
 
             </div>

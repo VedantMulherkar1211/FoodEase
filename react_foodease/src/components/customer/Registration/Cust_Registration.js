@@ -12,7 +12,8 @@ function CustomerRegistration() {
 
 
     const init = {
-        cname: {value:"",valid: false, touched: false, error:""}, 
+        cname: {value:"",valid: false, touched: false, error:""},
+        lname: {value:"",valid: false, touched: false, error:""}, 
         cemail: {value:"",valid: false, touched: false, error:""},
         phno: {value:"",valid: false, touched: false, error:""},
         uname: {value:"",valid: false, touched: false, error:""},
@@ -62,11 +63,20 @@ function CustomerRegistration() {
            break;
 
         case 'cname':
-           var pattern3 = /^[A-Za-z\s]{2,30}$/ 
+           var pattern3 = /^[A-Za-z]{2,30}$/ 
            if(!pattern3.test(val))
            {
               valid = false;
-              error = "enter your full name and only letters allow"
+              error = "enter valid last name and only letters allow"
+           }
+           break;
+
+        case 'lname':
+           var pattern3 = /^[A-Za-z]{2,30}$/ 
+           if(!pattern3.test(val))
+           {
+              valid = false;
+              error = "enter valid last name and only letters allow"
            }
            break;
 
@@ -137,25 +147,24 @@ function CustomerRegistration() {
         method:"POST",
         headers:{'content-type':'application/json'},
         body:JSON.stringify({
-          cemail:puser.cemail.value,
-          passw:puser.passw.value,
-          cusername :puser.uname.value,
-          cname :puser.cname.value,
-          ppassword :puser.passw.value,
-          phoneNumber :puser.phno.value,
-          caddress :puser.caddress.value
-            
+          fname :puser.cname.value,
+          lname :puser.lname.value,
+          address :puser.caddress.value,
+          phone :puser.phno.value,
+          username :puser.uname.value,
+          email:puser.cemail.value,
+          password:puser.passw.value,
         })
     }
     
-    fetch('http://localhost:8080/checkLogin', reOption)
+    fetch('http://localhost:8080/regCustomer', reOption)
     .then((response) => {
       if (response.ok) {
         // Successful login
         alert('Registration successful!');
 
         // Redirect or perform other actions on successful login
-        navigate("/home");
+        navigate("/login");
       } else {
         // Login failed
         alert('Registration Fail!! Please Try Again');
@@ -163,36 +172,6 @@ function CustomerRegistration() {
     })  
 
 }
-
-  // const InsertData = (e) => {
-
-  //   e.preventDefault();
-  //   const reOption = {
-  //       method:"POST",
-  //       headers:{'content-type':'application/json'},
-  //       body:JSON.stringify({
-            
-            
-  //       })
-  //   }
-  //   // fetch("http://localhost:9001/registerPassenger",reOption)
-  //   //     .then(resp=>resp.text())
-  //   //     .then(data => {
-  //   //         // Handle the response from the server
-  //   //         console.log(data);
-  //   //         if (data === 'Passenger inserted successfully') {
-  //   //           // Redirect or perform other actions for successful login
-  //   //           alert('Registration successful');
-  //   //           navigate('/login')
-  //   //         } else {
-  //   //           // Handle unsuccessful login
-  //   //           alert('Registration unsuccessful');
-  //   //         }
-  //   //       })
-    
-  // }
-
-
 
 
   return (
@@ -204,7 +183,7 @@ function CustomerRegistration() {
               <h2 className="text-center mb-4">Registration</h2>
 
               <div className="form-group">
-                <input type='text' className="form-control" placeholder='Full Name' id="fullName" autoComplete="off" name="cname" 
+                <input type='text' className="form-control" placeholder='First Name' id="firstName" autoComplete="off" name="cname" 
                     value={puser.cname.value}
                     onChange={(e)=>{handleChange("cname",e.target.value)}} 
                     onBlur={(e)=>{handleChange("cname",e.target.value)}}
@@ -213,6 +192,22 @@ function CustomerRegistration() {
                     <br/>
 
                     <div style={{ display: puser.cname.touched && !puser.cname.valid  ?"block":"none",color: 'red' }}>
+                    { puser.cname.error}
+                    </div>
+              </div>
+
+              <br/>
+
+              <div className="form-group">
+                <input type='text' className="form-control" placeholder='Last Name' id="lastName" autoComplete="off" name="lname" 
+                    value={puser.lname.value}
+                    onChange={(e)=>{handleChange("lname",e.target.value)}} 
+                    onBlur={(e)=>{handleChange("lname",e.target.value)}}
+                    />
+
+                    <br/>
+
+                    <div style={{ display: puser.lname.touched && !puser.lname.valid  ?"block":"none",color: 'red' }}>
                     { puser.cname.error}
                     </div>
               </div>

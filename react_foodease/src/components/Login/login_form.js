@@ -92,34 +92,92 @@ function Login() {
       //server side API
   }
 
+  
+
 
   const InsertData = (e) => {
 
-      e.preventDefault();
-      const reOption = {
-          method:"POST",
-          headers:{'content-type':'application/json'},
-          body:JSON.stringify({
-              email:puser.usern.value,
-              password:puser.passw.value
-              
-          })
-      }
-      
-      fetch('http://localhost:8080/checkLogin', reOption)
-      .then((response) => {
-        if (response.ok) {
-          // Successful login
-          alert('Login successful!');
-  
-          // Redirect or perform other actions on successful login
-          navigate("/home");
-        } else {
-          // Login failed
-          alert('Login failed. Please enter valid credentials and try again.');
-        }
-      })  
+    e.preventDefault();
+    const reqOption = {
+        method:"POST",
+        headers:{'content-type':'application/json'},
+        body:JSON.stringify({
+            email:puser.usern.value,
+            password:puser.passw.value
+            
+        })
+    }
 
+    fetch("http://localhost:8080/checkLogin", reqOption)
+    .then((resp) => {
+      if (resp.ok) {
+        return resp.text();
+      } else {
+        console.log("in error else");
+        throw new Error("Service Error");
+      }
+    })
+    // .then((resp) => console.log(resp + "in text"))
+    //  .then((resp) => resp.text())
+    .then((text) => (text.length ? JSON.parse(text) : {}))
+    .then((response) => {
+      if (Object.keys(response).length === 0) {
+        alert("Account not found");
+      } else {
+        console.log("in else");
+        if (response.status_approve === false) {
+         alert("Request not approved");
+        } else {
+          if (response.role_id.role_id === 1) {
+            navigate("/home");
+          } else if (response.role_id.role_id === 2) {
+            navigate("/homerestaurant");
+          } else if (response.role_id.role_id === 3) {
+            navigate("/homedelivery");
+          }else if (response.role_id.role_id === 4) {
+            navigate("");
+          }else{
+            console.log("At end");
+          }
+        }
+      }
+    })
+    .catch((error) => {
+      alert("server is not run");
+    });
+  // .then((obj)=>{console.log(obj)})
+
+
+    
+    // fetch('http://localhost:8080/checkLogin', reOption)
+    // .then((response) => {
+    //   if (response.ok) {
+    //     // Successful login
+    //     alert('Login successful!');
+    //     if(response.role_id==1)
+    //     {
+    //       navigate("/home");
+    //     }
+    //     if(response.role_id==2)
+    //     {
+    //       navigate("/homeres");
+    //     }
+    //     if(response.role_id==3)
+    //     {
+    //       navigate("/homedel");
+    //     }
+    //     if(response.role_id==4)
+    //     {
+    //       navigate("/homedel");
+    //     }
+
+    //     // Redirect or perform other actions on successful login
+    //     navigate("/home");
+    //   } else {
+    //     // Login failed
+    //     alert('Login failed. Please enter valid credentials and try again.');
+    //   }
+    // })  
   }
 
 
@@ -171,16 +229,10 @@ function Login() {
             New Customer? <Link to="/user/register">Register here</Link>
           </p>
           <p className="mb-0">
-             Restaurant <Link to="/restaurant/register">Register Restaurant</Link>
+            New Restaurant Register? <Link to="/restaurant/register">Register here</Link>
           </p>
-          
           <p className="mb-0">
-             Delivery <Link to="/delivery/register">Register Delivery</Link>
-          </p>
-
-          
-          <p className="mb-0">
-             Forget Password? <Link to="/forget">Forget Password</Link>
+            New Delivery Registration? <Link to="/delivery/register">Register here</Link>
           </p>
         </div>
 
