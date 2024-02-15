@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.31, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.32, for Win64 (x86_64)
 --
--- Host: localhost    Database: foodease
+-- Host: 127.0.0.1    Database: foodease
 -- ------------------------------------------------------
--- Server version	8.0.31
+-- Server version	8.0.32
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,37 +16,26 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `delivery_boy`
+-- Table structure for table `state`
 --
 
-DROP TABLE IF EXISTS `delivery_boy`;
+DROP TABLE IF EXISTS `state`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `delivery_boy` (
-  `driver_id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `phone` varchar(20) NOT NULL,
-  `location` varchar(255) NOT NULL,
-  `vehicle_License_No` varchar(50) NOT NULL,
-  `photo_id_number` varchar(50) NOT NULL,
-  `loginID` int DEFAULT NULL,
-  `status_aprove` tinyint NOT NULL DEFAULT '0',
-  PRIMARY KEY (`driver_id`),
-  UNIQUE KEY `phone` (`phone`),
-  UNIQUE KEY `vehicle_License_No` (`vehicle_License_No`),
-  UNIQUE KEY `photo_id_number` (`photo_id_number`),
-  KEY `d_login` (`loginID`),
-  CONSTRAINT `d_login` FOREIGN KEY (`loginID`) REFERENCES `login` (`loginID`)
+CREATE TABLE `state` (
+  `state_id` int NOT NULL,
+  `state_name` varchar(45) NOT NULL,
+  PRIMARY KEY (`state_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `delivery_boy`
+-- Dumping data for table `state`
 --
 
-LOCK TABLES `delivery_boy` WRITE;
-/*!40000 ALTER TABLE `delivery_boy` DISABLE KEYS */;
-/*!40000 ALTER TABLE `delivery_boy` ENABLE KEYS */;
+LOCK TABLES `state` WRITE;
+/*!40000 ALTER TABLE `state` DISABLE KEYS */;
+/*!40000 ALTER TABLE `state` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -58,4 +47,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-02-13  9:05:19
+-- Dump completed on 2024-02-15 21:48:51

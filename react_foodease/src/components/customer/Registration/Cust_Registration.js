@@ -157,7 +157,7 @@ function CustomerRegistration() {
         })
     }
     
-    fetch('http://localhost:8080/regCustomer', reOption)
+    fetch('http://localhost:8080/Customer', reOption)
     .then((response) => {
       if (response.ok) {
         // Successful login

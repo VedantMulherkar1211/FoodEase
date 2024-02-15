@@ -1,13 +1,13 @@
 import React from 'react';
-import Navbar from '../NavBar/navbar';
-import Category from '../Category/category';
-import SearchBar from '../Searchbar/searchbar';
+import NavbarMain from './navbar';
+import Category from '../customer/Category/category';
+import SearchBar from '../customer/Searchbar/searchbar';
 function Main()
 {
   return(
     <div className='container'>
       <div className='row'>
-   <Navbar/>
+   <NavbarMain/>
    </div>
 
    <div className='row'>

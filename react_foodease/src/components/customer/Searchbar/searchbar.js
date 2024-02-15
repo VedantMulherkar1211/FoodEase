@@ -1,28 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-function SearchBar() {
-  const handleSearch = (event) => {
-    event.preventDefault();
-    const searchTerm = event.target.elements.searchTerm.value;
-    console.log('Search term:', searchTerm);
+function RestaurantSearchBar() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+
+  const handleSearch = () => {
+    fetch(`http://localhost:8080/restaurants?search=${searchTerm}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch restaurants');
+        }
+        return response.json();
+      })
+      .then(data => {
+        setSearchResults(data);
+      })
+      .catch(error => {
+        console.error('Error fetching restaurants:', error);
+      });
+  };
+
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value);
   };
 
   return (
-    <div className='container mt-4 mb-4'>
-      <div className='row justify-content-center'>
-        <div className='col-md-8'> 
-          <nav className="navbar navbar-light bg-light">
-            <form className="form-inline w-100" onSubmit={handleSearch}>
-              <input className="form-control mr-sm-2 w-75" type="search" placeholder="Search for food and restaurant" aria-label="Search" name="searchTerm" />
-              <div className="d-flex justify-content-center align-items-center w-25">
-                <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-              </div>
-            </form>
-          </nav>
-        </div>
+    <div>
+      <input
+        type="text"
+        value={searchTerm}
+        onChange={handleChange}
+        placeholder="Search for restaurants..."
+      />
+      <button onClick={handleSearch}>Search</button>
+      <div>
+        {searchResults.map(restaurant => (
+          <div key={restaurant.restaurant_id}>
+            <p>{restaurant.name}</p>
+            {/* Display other restaurant information as needed */}
+          </div>
+        ))}
       </div>
     </div>
   );
 }
 
-export default SearchBar;
+export default RestaurantSearchBar;

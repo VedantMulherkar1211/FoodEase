@@ -11,7 +11,7 @@ function Category() {
     <div className='container'>
       <div className="row mt-4 pl-4">
         <div className="col-md-3">
-          <Link to="/restaurant/north-indian" className="card-link" style={{ textDecoration: 'none' }}>
+          <Link to="/home/category/northindian" className="card-link" style={{ textDecoration: 'none' }}>
             <div className="card food-cat">
               <div className="text-center">
                 <img src={northindian} alt="North Indian" className="card-img-top p-4" />

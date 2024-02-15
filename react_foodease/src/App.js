@@ -9,6 +9,8 @@ import AdminHome from './components/admin/Home/adminhome';
 import RestaurantsRegistration from './components/Restaurant/Registration/Rest_Registration';
 import DeliveryRegistration from './components/delivery/Registration/Delivery_Registration';
 import ForgetComponent from './components/Forget/forget';
+
+import NorthIndian from './components/customer/Category/NorthIndian/northindian';
 import Main from './components/Main/main';
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
         <Route path='/' element={<Main/>}/>
           <Route path='/login' element={<Login/>} />
           <Route path='/home' element={<CustomerHome/>}/>
+          <Route path='/home/category/northindian' element={<NorthIndian/>}/>
           <Route path='/homerestaurant' element={<RestaurantHome/>}/>
           <Route path='/homedelivery' element={<DeliveryHome/>}/>
           <Route path='/homeadmin' element={<AdminHome/>}/>
