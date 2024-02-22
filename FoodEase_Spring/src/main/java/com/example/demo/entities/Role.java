@@ -11,6 +11,7 @@ public class Role {
 	
 	@Id
 	int role_id;
+	
 	@Column
 	String role_name;
 	

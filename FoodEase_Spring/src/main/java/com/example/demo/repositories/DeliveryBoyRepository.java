@@ -4,12 +4,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import com.example.demo.entities.DeliveryBoy;
 import com.example.demo.entities.Login;
 
 import jakarta.transaction.Transactional;
 
+@Repository
 public interface DeliveryBoyRepository extends JpaRepository<DeliveryBoy, Integer> {
 	
 	@Query("select c from DeliveryBoy c where loginID= :l")

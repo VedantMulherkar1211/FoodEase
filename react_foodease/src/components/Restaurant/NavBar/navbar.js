@@ -1,7 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Navbar() {
+
+
+  const navigate = useNavigate();
+
+
+
+  const handleLogout = () => {
+    localStorage.removeItem("loginID");
+    navigate("/login");
+  };
+  
+
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
@@ -14,9 +27,13 @@ function Navbar() {
             <li className="nav-item">
               <Link className="nav-link" to="/home">Home</Link>
             </li>
+
+            <li className="nav-item">
+              <Link className="nav-link" to="/restaurant_Register">Register Restaurant</Link>
+            </li>
             
             <li className="nav-item">
-              <Link className="nav-link" to="/order">Order Status</Link>
+              <Link className="nav-link" to="/viewMenu">View Menu</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/earning">Total Earning</Link>
@@ -26,8 +43,11 @@ function Navbar() {
             </li>
 
             <li className="nav-item">
-              <Link className="nav-link" to="/">Log out</Link>
+            <button className="nav-link" onClick={handleLogout}>Log out</button>
             </li>
+            <li><Link className="nav-link" to="/">{localStorage.getItem("loginID")} Hello</Link>
+            </li>
+
           </ul>
         </div>
       </div>

@@ -9,6 +9,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+
+//@Setter @Getter @NoArgsConstructor
+//@AllArgsConstructor
+//@ToString
 @Entity
 @Table(name="login")
 public class Login {
@@ -27,7 +31,7 @@ public class Login {
 	String password;
 	
 	@Column
-    boolean status_approve;
+    Boolean status_approve;
 	
 	@ManyToOne
 	@JoinColumn(name="role_id")
@@ -38,7 +42,7 @@ public class Login {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Login(int loginID, String username, String email, String password, Role role_id,boolean status_approve) {
+	public Login(int loginID, String username, String email, String password, Role role_id,Boolean status_approve) {
 		super();
 		this.loginID = loginID;
 		this.username = username;
@@ -50,7 +54,7 @@ public class Login {
 	
 	
 
-	public Login(String username, String email, String password, Role role_id,boolean status_approve) {
+	public Login(String username, String email, String password, Role role_id,Boolean status_approve) {
 		super();
 		this.username = username;
 		this.email = email;
@@ -101,7 +105,7 @@ public class Login {
 		return status_approve;
 	}
 
-	public void setStatus_approve(boolean status_approve) {
+	public void setStatus_approve(Boolean status_approve) {
 		this.status_approve = status_approve;
 	}
 

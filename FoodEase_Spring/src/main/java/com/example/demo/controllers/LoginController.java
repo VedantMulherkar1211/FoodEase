@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,6 +44,21 @@ public class LoginController {
             e.printStackTrace(); // Log the exception using a logging framework like SLF4J
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred during login data registration.");
         }
+    }
+	
+	
+    
+    @GetMapping("/{loginID}/reject")
+    public ResponseEntity<Void> rejectLogin(@PathVariable("loginID") int loginID) {
+        lservice.rejectLogin(loginID);
+        return ResponseEntity.ok().build();
+    }
+    
+    @GetMapping("/{loginID}/approve")
+    public ResponseEntity<Void> approveLogin(@PathVariable("loginID") int loginID) {
+        lservice
+        .approveLogin(loginID);
+        return ResponseEntity.ok().build();
     }
 
 }

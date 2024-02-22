@@ -114,6 +114,7 @@ function Login() {
         return resp.text();
       } else {
         console.log("in error else");
+        document.getElementById("apr").innerHTML = "Incorrect email or password";
         throw new Error("Service Error");
       }
     })
@@ -123,19 +124,26 @@ function Login() {
     .then((response) => {
       if (Object.keys(response).length === 0) {
         alert("Account not found");
+        // document.getElementById("apr").innerHTML = "Incorrect email or password";
       } else {
         console.log("in else");
         if (response.status_approve === false) {
-         alert("Request not approved");
+        //  alert("Request not approved");
+         document.getElementById("apr").innerHTML = "Not approved";
         } else {
+          localStorage.setItem("loginID",response.loginID)
+          alert(response.username);
+
           if (response.role_id.role_id === 1) {
             navigate("/home");
+            localStorage.setItem("loginID",response.loginID)
           } else if (response.role_id.role_id === 2) {
             navigate("/homerestaurant");
           } else if (response.role_id.role_id === 3) {
-            navigate("/homedelivery");
+              navigate("/homedelivery");
           }else if (response.role_id.role_id === 4) {
-            navigate("");
+            navigate("/homeadmin");
+            localStorage.setItem("loginID",response.loginID)
           }else{
             console.log("At end");
           }
@@ -147,37 +155,7 @@ function Login() {
     });
   // .then((obj)=>{console.log(obj)})
 
-
-    
-    // fetch('http://localhost:8080/checkLogin', reOption)
-    // .then((response) => {
-    //   if (response.ok) {
-    //     // Successful login
-    //     alert('Login successful!');
-    //     if(response.role_id==1)
-    //     {
-    //       navigate("/home");
-    //     }
-    //     if(response.role_id==2)
-    //     {
-    //       navigate("/homeres");
-    //     }
-    //     if(response.role_id==3)
-    //     {
-    //       navigate("/homedel");
-    //     }
-    //     if(response.role_id==4)
-    //     {
-    //       navigate("/homedel");
-    //     }
-
-    //     // Redirect or perform other actions on successful login
-    //     navigate("/home");
-    //   } else {
-    //     // Login failed
-    //     alert('Login failed. Please enter valid credentials and try again.');
-    //   }
-    // })  
+  
   }
 
 
@@ -216,7 +194,8 @@ function Login() {
                     <div style={{ display: puser.passw.touched && !puser.passw.valid  ?"block":"none",color: 'red'}}>
                     { puser.passw.error}
                     </div>
-                
+                    <div id="apr" name="apr" style={{ color: 'red' }}> </div>
+
               </div>
               <br/>
               <br/>
@@ -235,8 +214,6 @@ function Login() {
             New Delivery Registration? <Link to="/delivery/register">Register here</Link>
           </p>
         </div>
-
-
             </div>
           </div>
         </div>

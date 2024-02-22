@@ -46,5 +46,28 @@ public class LoginService {
             throw new RuntimeException("Error getting login information by ID.", e);
         }
     }
+	
+	public void rejectLogin(int loginID) {
+        // Fetch the login by ID
+        Login login = lrepo.findById(loginID).get();
+               
+
+        // Perform any business logic related to rejecting the login
+        login.setStatus_approve(false);
+
+        // Save the updated login entity
+        lrepo.save(login);
+    }
+
+    
+    public void approveLogin(int loginID) {
+        lrepo.findById(loginID).ifPresent(login -> {
+            // Perform the approval logic here
+            // For example, set an approval status field on the Login entity
+            login.setStatus_approve(true);
+            lrepo.save(login);
+        });
+        // If the login is not present, no need to explicitly handle it
+    }
 
 }
