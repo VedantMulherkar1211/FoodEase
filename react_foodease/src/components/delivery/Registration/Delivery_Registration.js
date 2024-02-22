@@ -13,7 +13,8 @@ function DeliveryRegistration() {
 
 
     const init = {
-        dname: {value:"",valid: false, touched: false, error:""}, 
+        dname: {value:"",valid: false, touched: false, error:""},
+        lname: {value:"",valid: false, touched: false, error:""}, 
         demail: {value:"",valid: false, touched: false, error:""},
         phno: {value:"",valid: false, touched: false, error:""},
         uname: {value:"",valid: false, touched: false, error:""},
@@ -70,6 +71,15 @@ function DeliveryRegistration() {
            {
               valid = false;
               error = "enter your full name and only letters allow"
+           }
+           break;
+           
+        case 'lname':
+           var pattern3 = /^[A-Za-z]{2,30}$/ 
+           if(!pattern3.test(val))
+           {
+              valid = false;
+              error = "enter valid last name and only letters allow"
            }
            break;
 
@@ -156,32 +166,31 @@ function DeliveryRegistration() {
         method:"POST",
         headers:{'content-type':'application/json'},
         body:JSON.stringify({
-            demail:puser.demail.value,
-            passw:puser.passw.value,
-            dusername :puser.uname.value,
-            dname :puser.dname.value,
-            ppassword :puser.passw.value,
-            phoneNumber :puser.phno.value,
-            daddress :puser.daddress.value,
-            vlno :puser.vlno.value,
-            pino :puser.pino.value
-            
+            fname :puser.dname.value,
+            lname :puser.lname.value,
+            phone :puser.phno.value,
+            address :puser.daddress.value,
+            vehicle_License_No :puser.vlno.value,
+            photo_id_number :puser.pino.value,
+            username :puser.uname.value,
+            email:puser.demail.value,
+            password :puser.passw.value,
         })
     }
-    // fetch("http://localhost:9001/registerPassenger",reOption)
-    //     .then(resp=>resp.text())
-    //     .then(data => {
-    //         // Handle the response from the server
-    //         console.log(data);
-    //         if (data === 'Passenger inserted successfully') {
-    //           // Redirect or perform other actions for successful login
-    //           alert('Registration successful');
-    //           navigate('/login')
-    //         } else {
-    //           // Handle unsuccessful login
-    //           alert('Registration unsuccessful');
-    //         }
-    //       })
+
+    fetch('http://localhost:8080/regDeliveryBoy', reOption)
+    .then((response) => {
+      if (response.ok) {
+        // Successful login
+        alert('Registration successful!');
+
+        // Redirect or perform other actions on successful login
+        navigate("/login");
+      } else {
+        // Login failed
+        alert('Registration Fail!! Please Try Again');
+      }
+    })
     
   }
 
@@ -195,7 +204,7 @@ function DeliveryRegistration() {
             <div className="card-body bg-warning">
               <h2 className="text-center mb-4">Registration</h2>
               <div className="form-group">
-                <input type='text' className="form-control" placeholder='Full Name' id="fullName" autoComplete="off" name="dname" 
+                <input type='text' className="form-control" placeholder='First Name' id="fullName" autoComplete="off" name="dname" 
                     value={puser.dname.value}
                     onChange={(e)=>{handleChange("dname",e.target.value)}} 
                     onBlur={(e)=>{handleChange("dname",e.target.value)}}
@@ -205,6 +214,22 @@ function DeliveryRegistration() {
 
                     <div style={{ display: puser.dname.touched && !puser.dname.valid  ?"block":"none",color: 'red' }}>
                     { puser.dname.error}
+                    </div>
+              </div>
+
+              <br/>
+
+              <div className="form-group">
+                <input type='text' className="form-control" placeholder='Last Name' id="lastName" autoComplete="off" name="lname" 
+                    value={puser.lname.value}
+                    onChange={(e)=>{handleChange("lname",e.target.value)}} 
+                    onBlur={(e)=>{handleChange("lname",e.target.value)}}
+                    />
+
+                    <br/>
+
+                    <div style={{ display: puser.lname.touched && !puser.lname.valid  ?"block":"none",color: 'red' }}>
+                    { puser.lname.error}
                     </div>
               </div>
 
@@ -316,7 +341,7 @@ function DeliveryRegistration() {
               <br/>
               
               <div className="text-center">
-                <button type='submit' className="btn btn-primary btn-block btn btn-dark">Submit</button>
+              <button type='submit' className="btn btn-primary btn-block btn btn-dark" disabled={!puser.formValid} onClick={(e)=>InsertData(e)}>Submit</button>
               </div>
 
             </div>

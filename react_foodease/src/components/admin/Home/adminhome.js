@@ -1,5 +1,6 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+// import {Link} from 'react-router-dom';
 import Navbar from '../NavBar/navbar';
 function AdminHome()
 {
@@ -8,6 +9,7 @@ function AdminHome()
       <div className='row'>
    <Navbar/>
    </div>
+   
    </div>
   );
 }

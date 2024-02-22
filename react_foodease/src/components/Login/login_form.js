@@ -92,34 +92,70 @@ function Login() {
       //server side API
   }
 
+  
+
 
   const InsertData = (e) => {
 
-      e.preventDefault();
-      const reOption = {
-          method:"POST",
-          headers:{'content-type':'application/json'},
-          body:JSON.stringify({
-              email:puser.usern.value,
-              password:puser.passw.value
-              
-          })
-      }
-      
-      fetch('http://localhost:8080/checkLogin', reOption)
-      .then((response) => {
-        if (response.ok) {
-          // Successful login
-          alert('Login successful!');
-  
-          // Redirect or perform other actions on successful login
-          navigate("/home");
-        } else {
-          // Login failed
-          alert('Login failed. Please enter valid credentials and try again.');
-        }
-      })  
+    e.preventDefault();
+    const reqOption = {
+        method:"POST",
+        headers:{'content-type':'application/json'},
+        body:JSON.stringify({
+            email:puser.usern.value,
+            password:puser.passw.value
+            
+        })
+    }
 
+    fetch("http://localhost:8080/checkLogin", reqOption)
+    .then((resp) => {
+      if (resp.ok) {
+        return resp.text();
+      } else {
+        console.log("in error else");
+        document.getElementById("apr").innerHTML = "Incorrect email or password";
+        throw new Error("Service Error");
+      }
+    })
+    // .then((resp) => console.log(resp + "in text"))
+    //  .then((resp) => resp.text())
+    .then((text) => (text.length ? JSON.parse(text) : {}))
+    .then((response) => {
+      if (Object.keys(response).length === 0) {
+        alert("Account not found");
+        // document.getElementById("apr").innerHTML = "Incorrect email or password";
+      } else {
+        console.log("in else");
+        if (response.status_approve === false) {
+        //  alert("Request not approved");
+         document.getElementById("apr").innerHTML = "Not approved";
+        } else {
+          localStorage.setItem("loginID",response.loginID)
+          alert(response.username);
+
+          if (response.role_id.role_id === 1) {
+            navigate("/home");
+            localStorage.setItem("loginID",response.loginID)
+          } else if (response.role_id.role_id === 2) {
+            navigate("/homerestaurant");
+          } else if (response.role_id.role_id === 3) {
+              navigate("/homedelivery");
+          }else if (response.role_id.role_id === 4) {
+            navigate("/homeadmin");
+            localStorage.setItem("loginID",response.loginID)
+          }else{
+            console.log("At end");
+          }
+        }
+      }
+    })
+    .catch((error) => {
+      alert("server is not run");
+    });
+  // .then((obj)=>{console.log(obj)})
+
+  
   }
 
 
@@ -158,7 +194,8 @@ function Login() {
                     <div style={{ display: puser.passw.touched && !puser.passw.valid  ?"block":"none",color: 'red'}}>
                     { puser.passw.error}
                     </div>
-                
+                    <div id="apr" name="apr" style={{ color: 'red' }}> </div>
+
               </div>
               <br/>
               <br/>
@@ -171,20 +208,12 @@ function Login() {
             New Customer? <Link to="/user/register">Register here</Link>
           </p>
           <p className="mb-0">
-             Restaurant <Link to="/restaurant/register">Register Restaurant</Link>
+            New Restaurant Register? <Link to="/restaurant/register">Register here</Link>
           </p>
-          
           <p className="mb-0">
-             Delivery <Link to="/delivery/register">Register Delivery</Link>
-          </p>
-
-          
-          <p className="mb-0">
-             Forget Password? <Link to="/forget">Forget Password</Link>
+            New Delivery Registration? <Link to="/delivery/register">Register here</Link>
           </p>
         </div>
-
-
             </div>
           </div>
         </div>
