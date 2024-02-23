@@ -40,10 +40,10 @@ function Viewaddress()
                         <div key={index} className="col-md-4 mb-4">
                             <div className="card">
                                 <div className="card-body">
-                                    <h5 className="card-title">{ro.address}</h5>
-                                    <p className="card-text">Area: {ro.area_id.area_name}</p>
-                                    <p className="card-text">Pincode: {ro.area_id.pincode}</p>
-                                    <p className="card-text">City: {ro.area_id.city_id.city_name}</p>
+                                    <h5 className="card-title"></h5>
+                                    <p className="card-text">Area: </p>
+                                    <p className="card-text">Pincode: </p>
+                                    <p className="card-text">City: </p>
                                 </div>
                             </div>
                         </div>

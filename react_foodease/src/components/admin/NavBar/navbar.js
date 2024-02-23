@@ -34,7 +34,7 @@ function Navbar() {
           <div className="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <Link className="nav-link" to="/home">Home</Link>
+                <Link className="nav-link" to="/homeadmin">Home</Link>
               </li>
               <li className="nav-item dropdown">
                 <select className="form-select" aria-label="Default select example" value={selectedOption} onChange={handleOptionChange}>
@@ -46,6 +46,9 @@ function Navbar() {
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/statistics">Statistics</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/incomeReport">View Report</Link>
               </li>
               <li className="nav-item">
               <button className="nav-link" onClick={handleLogout}>Log out</button>
