@@ -14,7 +14,19 @@ public class OrderDummy {
     private int deliveryAddress;
     private int user;
     private int driver;
+    private int restaurant;
+    private String upi;
     private Set<OrderDetailDummy> orderItems;
+    
+    
+    
+    
+	public String getUpi() {
+		return upi;
+	}
+	public void setUpi(String upi) {
+		this.upi = upi;
+	}
 	public int getOrderID() {
 		return orderID;
 	}
@@ -53,6 +65,16 @@ public class OrderDummy {
 	}
 	public int getDriver() {
 		return driver;
+	}
+	
+	public int getRestaurant() {
+		return restaurant;
+	}
+	public void setRestaurant(int restaurant) {
+		this.restaurant = restaurant;
+	}
+	public void setOrder_status(int order_status) {
+		this.order_status = order_status;
 	}
 	public void setDriver(int driver) {
 		this.driver = driver;

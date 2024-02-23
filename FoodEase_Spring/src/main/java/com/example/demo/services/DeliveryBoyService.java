@@ -21,7 +21,7 @@ public class DeliveryBoyService {
 	@Autowired
     LoginService lservice;
 	
-	public DeliveryBoy getCustomer(Login l) {
+	public DeliveryBoy getDelivery(Login l) {
 		return crepo.getDeliveryBoy(l);
 	}
 	

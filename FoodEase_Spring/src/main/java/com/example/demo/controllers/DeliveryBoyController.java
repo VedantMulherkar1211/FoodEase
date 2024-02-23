@@ -40,7 +40,7 @@ public class DeliveryBoyController {
 	@GetMapping("/getDeliveryBoy")
 	public DeliveryBoy getCustomer(@RequestParam("loginID") int loginID) {
 		Login l=lservice.getById(loginID);
-		return dservice.getCustomer(l);
+		return dservice.getDelivery(l);
 	}
 	
 	

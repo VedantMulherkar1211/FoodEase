@@ -16,7 +16,7 @@ function Navbar() {
             </li>
             
             <li className="nav-item">
-              <Link className="nav-link" to="/order">Order Status</Link>
+              <Link className="nav-link" to="/deliveryOrder">Orders</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/earning">Total Earning</Link>

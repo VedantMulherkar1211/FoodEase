@@ -17,6 +17,13 @@ import ViewRestaurantMenu from './components/customer/Home/viewRestaurantMenu';
 import ViewCart from './components/customer/Home/viewCart';
 import Addaddress from './components/customer/Home/addDeliveryAddress';
 import Viewaddress from './components/customer/Home/viewAddress';
+import ViewRestaurant from './components/customer/Home/viewRestaurants';
+import Chooseaddress from './components/customer/Home/chooseAddress';
+import ConfirmOrder from './components/customer/Home/confirmOrder';
+import ViewCustomerOrder from './components/customer/Home/viewOrder';
+import ViewReceivedOrder from './components/admin/Home/viewReceivedOrders';
+import DeliveryOrder from './components/delivery/Home/deliveryOrder';
+import IncomeReport from './components/admin/Home/Report';
 function App() {
 
 
@@ -26,12 +33,31 @@ function App() {
       <Routes>
           <Route path='/' element={<Login/>} />
           <Route path='/login' element={<Login/>} />
+
           <Route path='/home' element={<CustomerHome/>}/>
           <Route path='/homerestaurant' element={<RestaurantHome/>}/>
           <Route path='/homedelivery' element={<DeliveryHome/>}/>
           <Route path='/homeadmin' element={<AdminHome/>}/>
+          <Route path='/incomeReport' element={<IncomeReport/>}/>
+
+          
+
           <Route path='/user/register' element={<CustomerRegistration/>}/>
           <Route path='/viewSearchRMenu' element={<ViewRestaurantMenu/>}/>
+          <Route path='/restaurants' element={<ViewRestaurant/>}/>
+          <Route path='/chooseAddress' element={<Chooseaddress/>}/>
+          <Route path='/confirmOrder' element={<ConfirmOrder/>}/>
+          <Route path='/viewCustomerOrder' element={<ViewCustomerOrder/>}/>
+          <Route path='/viewCart' element={<ViewCart/>}/>
+          <Route path='/enterDeliveryAddress' element={<Addaddress/>}/>
+          <Route path='/viewDeliveryAddress' element={<Viewaddress/>}/>
+
+          <Route path='/viewReceivedOrder' element={<ViewReceivedOrder/>}/>
+
+
+          <Route path='/deliveryOrder' element={<DeliveryOrder/>}/>
+
+          
           
 
           <Route path='/restaurant/register' element={<RestaurantsRegistration/>}/>
@@ -39,9 +65,7 @@ function App() {
           <Route path='/addMenu' element={<AddMenu/>} />
           <Route path='/newAddMenu' element={<NewMenuCreation/>} />
           <Route path='/viewMenu' element={<ViewMenu/>} />
-          <Route path='/viewCart' element={<ViewCart/>}/>
-          <Route path='/enterDeliveryAddress' element={<Addaddress/>}/>
-          <Route path='/viewDeliveryAddress' element={<Viewaddress/>}/>
+          
 
           <Route path='/delivery/register' element={<DeliveryRegistration/>}/>
           <Route path='/forget' element={<ForgetComponent/>}/>

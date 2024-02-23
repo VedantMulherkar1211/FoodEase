@@ -37,10 +37,11 @@ public class RestaurantController {
 	AreaService aserv;
 	
 	@GetMapping("/getAllRestaurant")
-    public List<Restaurant> getAllOccupants() 
+    public List<Restaurant> getAllRestaurant() 
 	{
         return rserv.getAllRestaurants();
     }
+	
 	
 	
 	 @PostMapping("/saveRestaurant")

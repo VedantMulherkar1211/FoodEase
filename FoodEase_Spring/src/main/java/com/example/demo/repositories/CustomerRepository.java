@@ -27,6 +27,6 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 	void insertCustomer(@Param("name") String name, @Param("address") String address, @Param("phone") String phone, @Param("loginId") String loginId);
 	
 	@Query(value = "SELECT l.*, c.* FROM login l, customer c where l.loginID = c.loginID and l.status_approve IS NOT NULL", nativeQuery = true)
-List<Object[]> findApprovedLoginsAndCustomers();
+    List<Object[]> findApprovedLoginsAndCustomers();
 
 }
